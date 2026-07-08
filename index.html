@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- GLOBAL STYLES & THEME --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: #ff758c;
+            text-shadow: 0 0 10px rgba(255, 117, 140, 0.3);
+        }
+
+        /* --- PRELOADER --- */
+        #loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: #0f0c29;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+        }
+        .loader-heart {
+            font-size: 4rem;
+            animation: heartbeat 1.2s infinite;
+            margin-bottom: 15px;
+        }
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.25); }
+        }
+
+        /* --- AMBIENT DECORATIONS --- */
+        .background-decorations {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        .floating-item {
+            position: absolute;
+            font-size: 1.5rem;
+            opacity: 0.15;
+            animation: floatUp 12s infinite linear;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(105vh) translateX(0) rotate(0deg); opacity: 0.15; }
+            50% { opacity: 0.4; }
+            100% { transform: translateY(-10vh) translateX(50px) rotate(360deg); opacity: 0; }
+        }
+
+        /* --- NAVIGATION --- */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            padding: 20px 40px;
+            background: rgba(15, 12, 41, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            z-index: 100;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #ff758c;
+            letter-spacing: 1px;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        nav ul li a {
+            color: #e0e0e0;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+        nav ul li a:hover { color: #ff758c; }
+
+        /* --- STRUCTURAL LAYOUT --- */
+        section {
+            min-height: 100vh;
+            padding: 120px 20px 60px 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.04);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 40px;
+            max-width: 700px;
+            width: 100%;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+
+        /* --- SECTION 1: HERO --- */
+        .hero-content h3 {
+            font-size: 1.1rem;
+            letter-spacing: 4px;
+            color: #ff7eb3;
+            margin-bottom: 10px;
+        }
+        #typing {
+            font-size: 3.2rem;
+            font-weight: 700;
+            min-height: 75px;
+            background: linear-gradient(45deg, #ffffff, #ff7eb3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .name {
+            font-family: 'Great Vibes', cursive;
+            font-size: 4.5rem;
+            color: #ff758c;
+            margin-bottom: 25px;
+        }
+        .hero-content p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #d1d1e9;
+            margin-bottom: 35px;
+        }
+        .cta-btn {
+            padding: 16px 36px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            background: linear-gradient(45deg, #ff758c, #ff7eb3);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 117, 140, 0.4);
+            transition: all 0.3s ease;
+        }
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 117, 140, 0.6);
+        }
+
+        /* --- SECTION 2: LIVE CELEBRATION TIMER --- */
+        .timer-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .time-box {
+            background: rgba(255, 255, 255, 0.06);
+            padding: 20px;
+            border-radius: 16px;
+            min-width: 90px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .time-box span {
+            display: block;
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ff7eb3;
+        }
+        .time-box label {
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: #a0a0c0;
+            text-transform: uppercase;
+        }
+
+        /* --- SECTION 3: INTERACTIVE CAKE --- */
+        .cake-wrapper {
+            position: relative;
+            height: 250px;
+            width: 300px;
+            margin: 40px auto 20px auto;
+        }
+        .cake {
+            position: absolute;
+            bottom: 0; width: 200px; height: 120px;
+            background: #6d4c41;
+            left: 50%; transform: translateX(-50%);
+            border-radius: 12px 12px 4px 4px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .cake::before {
+            content: ''; position: absolute;
+            top: 0; width: 100%; height: 35px;
+            background: #ff80ab; border-radius: 12px 12px 0 0;
+        }
+        .candle-container {
+            position: absolute;
+            bottom: 120px; left: 50%;
+            transform: translateX(-50%);
+            display: flex; gap: 15px;
+        }
+        .candle {
+            width: 12px; height: 50px;
+            background: linear-gradient(to right, #00e5ff, #00b0ff);
+            position: relative; cursor: pointer;
+        }
+        .flame {
+            width: 12px; height: 20px;
+            background: #ff9100;
+            border-radius: 50% 50% 20% 20%;
+            position: absolute; top: -22px; left: 0;
+            box-shadow: 0 0 10px #ff9100;
+            animation: flicker 0.6s infinite alternate;
+            transition: opacity 0.3s ease;
+        }
+        .candle.extinguished .flame {
+            opacity: 0;
+            pointer-events: none;
+        }
+        @keyframes flicker {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+        .cake-instruction {
+            font-size: 0.9rem;
+            color: #a0a0c0;
+            font-style: italic;
+            margin-top: 15px;
+        }
+
+        /* --- SECTION 4: TIMELINE --- */
+        .timeline {
+            position: relative;
+            max-width: 800px; margin: 0 auto;
+            padding: 20px 0;
+        }
+        .timeline::after {
+            content: ''; position: absolute; width: 2px;
+            background: rgba(255, 255, 255, 0.1);
+            top: 0; bottom: 0; left: 50%; margin-left: -1px;
+        }
+        .timeline-item {
+            padding: 10px 40px; position: relative;
+            background: inherit; width: 50%;
+        }
+        .timeline-item.left { left: 0; text-align: right; }
+        .timeline-item.right { left: 50%; text-align: left; }
+        .timeline-item::after {
+            content: '❤️'; position: absolute; width: 24px; height: 24px;
+            right: -12px; top: 15px; z-index: 1; font-size: 0.9rem;
+        }
+        .timeline-item.right::after { left: -12px; }
+        .timeline-content {
+            padding: 20px; background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+        }
+        .timeline-content h3 { color: #ff7eb3; margin-bottom: 5px; font-size: 1.1rem; }
+
+        /* --- SECTION 5: GALLERY --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 20px; width: 100%; max-width: 800px;
+            margin-top: 20px;
+        }
+        .photo-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .photo-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #ff758c;
+        }
+        .photo-icon { font-size: 2.8rem; margin-bottom: 10px; }
+        .photo-card p { font-size: 0.85rem; color: #d1d1e9; }
+
+        /* --- MODAL POPUP --- */
+        .gift-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100vh;
+            background: rgba(11, 9, 26, 0.9);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.5s ease; z-index: 2000;
+            padding: 20px;
+        }
+        .gift-modal.show { opacity: 1; pointer-events: auto; }
+        .gift-content {
+            background: linear-gradient(135deg, #ff7eb3, #ff758c);
+            padding: 45px 35px; border-radius: 28px;
+            max-width: 500px; width: 100%; text-align: center;
+            box-shadow: 0 15px 50px rgba(255, 117, 140, 0.5);
+            transform: scale(0.7); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .gift-modal.show .gift-content { transform: scale(1); }
+        .gift-content h2 { color: white; margin-bottom: 15px; text-shadow: none; }
+        .gift-content p { line-height: 1.8; margin-bottom: 25px; font-size: 1.05rem; }
+        .close-btn {
+            background: white; color: #ff758c;
+            padding: 12px 30px; border: none; border-radius: 25px;
+            font-weight: 600; cursor: pointer; transition: transform 0.2s;
+        }
+        .close-btn:hover { transform: scale(1.05); }
+
+        /* --- FIREWORKS & FOOTER --- */
+        #fireworks {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            pointer-events: none; z-index: 1500;
+        }
+        footer {
+            text-align: center; padding: 30px;
+            background: rgba(15, 12, 41, 0.4);
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.9rem; color: #a0a0c0;
+        }
+
+        /* --- RESPONSIVENESS --- */
+        @media (max-width: 768px) {
+            #typing { font-size: 2.3rem; min-height: 60px; }
+            .name { font-size: 3.2rem; }
+            nav ul { display: none; } /* Kept minimal for mobile simplicity */
+            .timeline::after { left: 31px; }
+            .timeline-item { width: 100%; text-align: left !important; padding-left: 70px; padding-right: 20px; }
+            .timeline-item.right { left: 0; }
+            .timeline-item::after { left: 20px !important; right: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Preloader -->
+    <div id="loader">
+        <div class="loader-heart">❤️</div>
+        <p style="letter-spacing: 2px; font-size: 0.9rem; color: #ff7eb3;">PREPARING YOUR SURPRISE</p>
+    </div>
+
+    <!-- Floating Background Objects -->
+    <div class="background-decorations" id="ambience"></div>
+
+    <header>
+        <nav>
+            <div class="logo">✨ CELEBRATION</div>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#countdown">Moment</a></li>
+                <li><a href="#cake">Blow Candles</a></li>
+                <li><a href="#timeline">Our Story</a></li>
+                <li><a href="#gallery">Wishes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section 1: Hero Welcome -->
+    <section id="home">
+        <div class="hero-content">
+            <h3>A SPECIAL DAY IS HERE</h3>
+            <h1 id="typing"></h1>
+            <h2 class="name">Beautiful Soul ❤️</h2>
+            <p>
+                Today, the universe pauses to honor someone incredibly rare.<br>
+                May your inner peace grow deeper, your joy radiate further,<br>
+                and your path unfold beautifully exactly as you dream it.
+            </p>
+            <button class="cta-btn" id="openGift">🎁 Open Your Surprise</button>
+        </div>
+    </section>
+
+    <!-- Section 2: Celebration Countdown / Up-counter -->
+    <section id="countdown">
+        <div class="glass-card">
+            <h2>Time Celebrating You</h2>
+            <p style="margin-bottom: 25px; color: #d1d1e9;">Every second of your presence makes the world a warmer place.</p>
+            <div class="timer-container">
+                <div class="time-box"><span id="days">00</span><label>Days</label></div>
+                <div class="time-box"><span id="hours">00</span><label>Hrs</label></div>
+                <div class="time-box"><span id="minutes">00</span><label>Min</label></div>
+                <div class="time-box"><span id="seconds">00</span><label>Sec</label></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 3: Interactive Birthday Cake -->
+    <section id="cake">
+        <div class="glass-card">
+            <h2>Make A Wish</h2>
+            <p style="color: #d1d1e9;">Click on each flame to blow out the candles individually!</p>
+            <div class="cake-wrapper">
+                <div class="candle-container">
+                    <div class="candle" onclick="extinguish(this)"><div class="flame"></div></div>
+                    <div class="candle" onclick="extinguish(this)"><div class="flame"></div></div>
+                    <div class="candle" onclick="extinguish(this)"><div class="flame"></div></div>
+                </div>
+                <div class="cake"></div>
+            </div>
+            <p class="cake-instruction" id="cakeStatus">3 candles are burning bright...</p>
+        </div>
+    </section>
+
+    <!-- Section 4: Timeline / Narrative Story -->
+    <section id="timeline">
+        <h2>Beautiful Milestones</h2>
+        <div class="timeline">
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>The Spark</h3>
+                    <p>When you entered the world, you brought an undeniable light and kindness along with you.</p>
+                </div>
+            </div>
+            <div class="timeline-item right">
+                <div class="timeline-content">
+                    <h3>The Growth</h3>
+                    <p>Navigating challenges elegantly, turning moments into core wisdom and lasting strength.</p>
+                </div>
+            </div>
+            <div class="timeline-item left">
+                <div class="timeline-content">
+                    <h3>The Present</h3>
+                    <p>Standing today as an amazing soul, loved deeply by everyone lucky enough to know you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section 5: Expanded Gallery Elements -->
+    <section id="gallery">
+        <div class="glass-card" style="max-width: 900px;">
+            <h2>Daily Reminders</h2>
+            <p style="margin-bottom: 20px; color: #d1d1e9;">A small gallery of what you mean to the world.</p>
+            <div class="gallery-grid">
+                <div class="photo-card">
+                    <div class="photo-icon">✨</div>
+                    <h3>Radiance</h3>
+                    <p>Your authentic energy lifts up dark rooms.</p>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-icon">🌱</div>
+                    <h3>Kindness</h3>
+                    <p>The quiet way you care for people around you.</p>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-icon">🎨</div>
+                    <h3>Passion</h3>
+                    <p>The unique, beautiful dreams you chase.</p>
+                </div>
+                <div class="photo-card">
+                    <div class="photo-icon">⏳</div>
+                    <h3>Resilience</h3>
+                    <p>Your grace through life's dynamic seasons.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Surprise Box -->
+    <div class="gift-modal" id="giftBox">
+        <div class="gift-content">
+            <h2>🎁 A Personal Note</h2>
+            <p>
+                You deserve all the purest forms of happiness, genuine love, unshakeable peace, and boundless success. Never forget how completely exceptional you are.<br><br>
+                Happy Birthday! ❤️
+            </p>
+            <button class="close-btn" id="closeGift">Close</button>
+        </div>
+    </div>
+
+    <!-- Celebration VFX Layer -->
+    <canvas id="fireworks"></canvas>
+
+    <footer>
+        <p>Crafted thoughtfully for an incredible celebration. Made with ❤️</p>
+    </footer>
+
+    <<script>
+window.addEventListener("load", () => {
+    const loader = document.getElementById("loader");
+
+    setTimeout(() => {
+        loader.style.opacity = "0";
+
+        setTimeout(() => {
+            loader.style.display = "none";
+            runTypingEffect();
+            buildAmbience();
+            startTimer();
+        }, 800);
+
+    }, 1200);
+});
+
+function runTypingEffect() {
+    const text = "Happy Birthday ❤️";
+    const target = document.getElementById("typing");
+    let i = 0;
+
+    function type() {
+        if (i < text.length) {
+            target.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(type, 120);
+        }
+    }
+
+    type();
+}
+
+function buildAmbience() {
+    const container = document.getElementById("ambience");
+    const items = ["🎈","❤️","✨","🌸","⭐"];
+
+    for(let i=0;i<30;i++){
+        const el=document.createElement("div");
+        el.className="floating-item";
+        el.innerHTML=items[Math.floor(Math.random()*items.length)];
+        el.style.left=Math.random()*100+"vw";
+        el.style.animationDelay=Math.random()*10+"s";
+        el.style.fontSize=(Math.random()*20+20)+"px";
+        container.appendChild(el);
+    }
+}
+
+function startTimer(){
+
+    const start=new Date();
+
+    setInterval(()=>{
+
+        const now=new Date();
+
+        const diff=now-start;
+
+        const days=Math.floor(diff/86400000);
+
+        const hours=Math.floor(diff%86400000/3600000);
+
+        const minutes=Math.floor(diff%3600000/60000);
+
+        const seconds=Math.floor(diff%60000/1000);
+
+        document.getElementById("days").textContent=days;
+        document.getElementById("hours").textContent=hours;
+        document.getElementById("minutes").textContent=minutes;
+        document.getElementById("seconds").textContent=seconds;
+
+    },1000);
+
+}
+
+let remaining=3;
+
+function extinguish(candle){
+
+    if(candle.classList.contains("extinguished")) return;
+
+    candle.classList.add("extinguished");
+
+    remaining--;
+
+    const status=document.getElementById("cakeStatus");
+
+    if(remaining>0){
+
+        status.textContent=remaining+" candles are still burning...";
+
+    }else{
+
+        status.textContent="🎉 Happy Birthday! Make your wish!";
+
+        launchFireworks();
+
+    }
+
+}
+
+const modal=document.getElementById("giftBox");
+
+document.getElementById("openGift").onclick=()=>{
+
+    modal.classList.add("show");
+
+    launchFireworks();
+
+};
+
+document.getElementById("closeGift").onclick=()=>{
+
+    modal.classList.remove("show");
+
+};
+
+function launchFireworks(){
+
+    const canvas=document.getElementById("fireworks");
+
+    const ctx=canvas.getContext("2d");
+
+    canvas.width=window.innerWidth;
+
+    canvas.height=window.innerHeight;
+
+    for(let i=0;i<80;i++){
+
+        setTimeout(()=>{
+
+            const x=Math.random()*canvas.width;
+
+            const y=Math.random()*canvas.height/2;
+
+            ctx.beginPath();
+
+            ctx.arc(x,y,3,0,Math.PI*2);
+
+            ctx.fillStyle=`hsl(${Math.random()*360},100%,60%)`;
+
+            ctx.fill();
+
+            setTimeout(()=>ctx.clearRect(0,0,canvas.width,canvas.height),1000);
+
+        },i*20);
+
+    }
+
+}
+</script>
+
+</body>
+</html>
